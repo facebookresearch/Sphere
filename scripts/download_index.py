@@ -90,4 +90,3 @@ if __name__ == "__main__":
         download_sparse(args.dest_dir, args.overwrite)
     else:
         raise ValueError
-
