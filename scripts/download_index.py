@@ -10,6 +10,7 @@ SPHERE_URL = "http://dl.fbaipublicfiles.com/sphere"
 # dense index constants
 SPHERE_DENSE_PARTITIONS = 32
 PARTITIONS_FILES = ["buffer.pkl", "cfg.json", "meta.pkl", "index.faiss"]
+SPARSE_FILENAME = "cc_net_bm25.tar.gz"
 
 
 def download_file(url, file_path, overwrite):
@@ -40,7 +41,9 @@ def download_file(url, file_path, overwrite):
 
 
 def download_sparse(dest_dir, overwrite):
-    raise NotImplementedError
+    Path(dest_dir + "/sparse").mkdir(parents=True, exist_ok=True)
+    print("Downloading sparse index:")
+    download_file(SPHERE_URL + "/" + SPARSE_FILENAME, dest_dir + "/sparse/" + SPARSE_FILENAME, overwrite)
 
 
 def download_dense(dest_dir, overwrite, partitions):
