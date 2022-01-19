@@ -43,7 +43,11 @@ def download_file(url, file_path, overwrite):
 def download_sparse(dest_dir, overwrite):
     Path(dest_dir + "/sparse").mkdir(parents=True, exist_ok=True)
     print("Downloading sparse index:")
-    download_file(SPHERE_URL + "/" + SPARSE_FILENAME, dest_dir + "/sparse/" + SPARSE_FILENAME, overwrite)
+    download_file(
+        SPHERE_URL + "/" + SPARSE_FILENAME,
+        dest_dir + "/sparse/" + SPARSE_FILENAME,
+        overwrite,
+    )
 
 
 def download_dense(dest_dir, overwrite, partitions):
@@ -55,7 +59,9 @@ def download_dense(dest_dir, overwrite, partitions):
         Path(partition_dir).mkdir(exist_ok=True)
         for file_name in PARTITIONS_FILES:
             download_file(
-                SPHERE_URL + dense_suffix + file_name, partition_dir + file_name, overwrite
+                SPHERE_URL + dense_suffix + file_name,
+                partition_dir + file_name,
+                overwrite,
             )
 
 
