@@ -4,12 +4,16 @@ import requests
 
 from tqdm import tqdm
 from pathlib import Path
+import tarfile
+
 
 SPHERE_URL = "http://dl.fbaipublicfiles.com/sphere"
 
 # dense index constants
 SPHERE_DENSE_PARTITIONS = 32
 PARTITIONS_FILES = ["buffer.pkl", "cfg.json", "meta.pkl", "index.faiss"]
+
+# sparse index constants
 SPARSE_FILENAME = "cc_net_bm25.tar.gz"
 
 
@@ -42,12 +46,20 @@ def download_file(url, file_path, overwrite):
 
 def download_sparse(dest_dir, overwrite):
     Path(dest_dir + "/sparse").mkdir(parents=True, exist_ok=True)
-    print("Downloading sparse index:")
+    print("Downloading compressed sparse index:")
     download_file(
         SPHERE_URL + "/" + SPARSE_FILENAME,
         dest_dir + "/sparse/" + SPARSE_FILENAME,
         overwrite,
     )
+
+    print("Extracting sparse index:")
+    my_tar = tarfile.open(dest_dir + "/sparse/" + SPARSE_FILENAME)
+    my_tar.extractall(dest_dir + "/sparse/")  # specify which folder to extract to
+    my_tar.close()
+
+    print("Removing compressed sparse index:")
+    os.remove(dest_dir + "/sparse/" + SPARSE_FILENAME)
 
 
 def download_dense(dest_dir, overwrite, partitions):
