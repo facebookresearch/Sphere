@@ -212,5 +212,12 @@ python scripts/sphere_client_demo_hf.py \
     --index-id dense
 ```
 
+# Weaviate Import
+
+The dataset is also available to load into Weaviate for hybrid vector search and is described in [this post](https://weaviate.io/blog/2022/12/sphere-dataset-in-weaviate.md.html).
+
+* [Import using Python client](https://weaviate.io/blog/2022/12/sphere-dataset-in-weaviate.md.html#importing-sphere-with-python).
+* [Import using Spark connector](https://weaviate.io/blog/2022/12/sphere-dataset-in-weaviate.md.html#importing-sphere-with-spark).
+
 # License
 `Sphere` is released under the CC-BY-NC 4.0 license. See the `LICENSE` file for details.
